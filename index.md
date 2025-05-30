@@ -6,11 +6,27 @@ layout: default
 Remove the gradients from both your broadband and narrowband images. Though it's not strictly necessary, you can also color calibrate your broadband at this step. Keep the stars in for now, and don't perform any sharpening before subtracting the emissions to ensure accurate subtraction. Don't denoise your broadband and avoid denoising your narrowband if you can help it. Do not stretch the image yet - both continuum and emission subtraction need to be done on linear data. 
 * [OSC ONLY] You need to extract all emission bands from your dualband images. Due to how the filters used in the CFA pass light, the G and B channels will contain some red signal, meaning that, if you're using an Ha/Oiii dualband filter, the Oiii will contain some Ha "leakage". To remedy this you can use the [DBXtract sctipt](https://dbxtract.astrocitas.com/) but I usually get more accurate results by doing it manually. Use the standard PixelMath for image subtraction `$T - factor * ($T[0] - med($T[0]))` on both G and B channels. Find the highest factors that still avoid oversubtraction. If an emission band is captured in two color channels simultaneously (e.g. Oiii), combine them. Tip: Oiii combination factors are about 66% G and 33% B when combining.
 
-<Carousel>
-  <img src="assets/dualband - properly subtracted.jpg" alt="Properly subtracted Oiii channel" />
-  <img src="assets/dualband - oversubtracted.jpg" alt="Oversubtracted Oiii channel" />
-  <img src="assets/dualband - original.jpg" alt="Original Oiii channel" />
-</Carousel>
+<div id="carouselStep1" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="assets/dualband - properly subtracted.jpg" class="d-block w-100" alt="Properly subtracted Oiii channel" />
+    </div>
+    <div class="carousel-item">
+      <img src="assets/dualband - oversubtracted.jpg" class="d-block w-100" alt="Oversubtracted Oiii channel" />
+    </div>
+    <div class="carousel-item">
+      <img src="assets/dualband - original.jpg" class="d-block w-100" alt="Original Oiii channel" />
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselStep1" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselStep1" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 ###### Figure 1. Properly subtracted vs oversubtracted vs original Oiii channel of the Pacman nebula with a dualband filter. Notice the telltale sign of oversubtracting - previously bright areas are now darker than the image median/background.
 
 ## Step 2:
